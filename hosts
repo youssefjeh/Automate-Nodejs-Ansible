@@ -1,8 +1,1 @@
-[webserver]
-13.50.110.145 
-13.50.17.246 
-
-[webserver:vars]
-ansible_ssh_private_key_file=/home/youssefjh/Downloads/vm.pem
-ansible_user=ubuntu
-
+13.48.47.166 ansible_ssh_private_key_file=/home/youssefjh/Downloads/vm.pem ansible_user=ubuntu
