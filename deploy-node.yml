@@ -13,7 +13,9 @@
           - npm
 
 - name: Deploy nodejs app
+  become: true
   hosts: 13.48.47.166
+
   tasks:
   #  - name: Copy nodejs folder to a server
    #   copy:
@@ -23,3 +25,20 @@
       unarchive:
         src: /home/youssefjh/mynodecicd/app/bootcamp-node-project-1.0.tgz  #/home/ubuntu/node-project-1.0.tgz 
         dest: /home/ubuntu/
+    - name: Install dependencies
+      npm:
+        path: /home/ubuntu/package
+    - name: Start the app
+      command: # node /home/ubuntu/package/app/server
+        chdir: /home/ubuntu/package/app
+        cmd: node server
+      async: 1000
+      poll: 0
+    - name: Ensure app is running
+      shell: ps aux | grep node
+      register: app_status
+    - debug: msg={{app_status.stdout_lines}}
+
+
+
+    
