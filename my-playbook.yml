@@ -1,0 +1,19 @@
+---
+- name: Configure nginx web server
+  become: yes
+  hosts: webserver
+
+  tasks:
+  - name: update apt cache
+    apt:
+      update_cache: yes
+
+  - name: uninstall nginx server
+    apt : 
+      name: nginx=1.18*
+      state: absent
+
+  - name: stop nginx
+    service:
+      name: nginx
+      state: stopped
