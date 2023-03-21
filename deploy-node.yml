@@ -1,6 +1,6 @@
 ---
 - name: Install Node and npm
-  hosts: 16.170.213.58
+  hosts: 13.48.127.209
   become: true
   tasks:
     - name: Update apt repo and cach
@@ -14,7 +14,7 @@
 
 - name: Deploy nodejs app
   become: true
-  hosts: 16.170.213.58
+  hosts: 13.48.127.209
   vars_files:
     - ansible-vars
   tasks:
@@ -33,7 +33,7 @@
         path: "{{destination}}/package"
     - name: Start the app
       command:                           # node /home/ubuntu/package/app/server
-        chdir: "{{destination}}/package/app"
+        chdir: "{{destination}}/package"
         cmd: node server
       async: 1000
       poll: 0
