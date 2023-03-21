@@ -32,9 +32,7 @@
       npm:
         path: "{{destination}}/package"
     - name: Start the app
-      command:                           # node /home/ubuntu/package/app/server
-        chdir: "{{destination}}/package"
-        cmd: node server
+      command: node server                 # node /home/ubuntu/package/app/serve  
       async: 1000
       poll: 0
     - name: Ensure app is running
