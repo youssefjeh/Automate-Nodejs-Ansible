@@ -1,6 +1,6 @@
 ---
 - name: Install Node and npm
-  hosts: 13.48.47.166
+  hosts: 16.170.213.58
   become: true
   tasks:
     - name: Update apt repo and cach
@@ -14,23 +14,26 @@
 
 - name: Deploy nodejs app
   become: true
-  hosts: 13.48.47.166
-
+  hosts: 16.170.213.58
+  vars_files:
+    - ansible-vars
   tasks:
+
   #  - name: Copy nodejs folder to a server
    #   copy:
     #    src: /home/youssefjh/mynodecicd/app/bootcamp-node-project-1.0.tgz 
      #   dest: /home/ubuntu/node-project-1.0.tgz 
+
     - name: Unpack the nodejs file
       unarchive:
-        src: /home/youssefjh/mynodecicd/app/bootcamp-node-project-1.0.tgz  #/home/ubuntu/node-project-1.0.tgz 
-        dest: /home/ubuntu/
+        src: "{{location}}/bootcamp-node-project-{{version}}.tgz"  #/home/ubuntu/node-project-1.0.tgz 
+        dest: "{{destination}}"
     - name: Install dependencies
       npm:
-        path: /home/ubuntu/package
+        path: "{{destination}}/package"
     - name: Start the app
-      command: # node /home/ubuntu/package/app/server
-        chdir: /home/ubuntu/package/app
+      command:                           # node /home/ubuntu/package/app/server
+        chdir: "{{destination}}/package/app"
         cmd: node server
       async: 1000
       poll: 0

@@ -1,0 +1,3 @@
+location : /home/youssefjh/mynodecicd/app
+version : 1.0
+destination: /home/ubuntu
